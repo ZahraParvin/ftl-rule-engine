@@ -1,0 +1,8 @@
+# Invented collective agreement with a different shape to Operator A -- the point
+# is that two agreements tighten different limits and both must resolve cleanly
+# against the same regulatory baseline.
+extends: easa_base
+name: "Operator B pilot CBA"
+overrides:
+  max_block_28_days:    {value: "95:00", ref: "CBA art. 12"}
+  rexrest_min_duration: {value: "48:00", ref: "CBA art. 15"}

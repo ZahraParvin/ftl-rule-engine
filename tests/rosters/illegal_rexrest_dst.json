@@ -1,0 +1,48 @@
+{
+  "crew_id": "PARVIN_Z",
+  "home_base": "ENGM",
+  "base_tz": "Europe/Oslo",
+  "_note": "36:00 of wall clock across the March clock change is 35:00 of actual rest -- short of the 36:00 minimum",
+  "duties": [
+    {
+      "report": "2027-03-27T08:00:00Z",
+      "release": "2027-03-27T19:00:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2027-03-27T08:45:00Z",
+          "on_block": "2027-03-27T13:17:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2027-03-27T13:57:30Z",
+          "on_block": "2027-03-27T18:30:00Z"
+        }
+      ]
+    },
+    {
+      "report": "2027-03-29T06:00:00Z",
+      "release": "2027-03-29T14:30:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2027-03-29T06:45:00Z",
+          "on_block": "2027-03-29T10:02:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2027-03-29T10:42:30Z",
+          "on_block": "2027-03-29T14:00:00Z"
+        }
+      ]
+    }
+  ]
+}

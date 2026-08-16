@@ -1,0 +1,28 @@
+{
+  "crew_id": "PARVIN_Z",
+  "home_base": "ENGM",
+  "base_tz": "Europe/Oslo",
+  "_note": "FDP 11:20 exceeds the 11:15 limit -- fails by five minutes",
+  "duties": [
+    {
+      "report": "2026-09-01T14:45:00Z",
+      "release": "2026-09-02T02:35:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T15:30:00Z",
+          "on_block": "2026-09-01T20:27:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-01T21:07:30Z",
+          "on_block": "2026-09-02T02:05:00Z"
+        }
+      ]
+    }
+  ]
+}

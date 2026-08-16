@@ -1,0 +1,42 @@
+{
+  "crew_id": "PARVIN_Z",
+  "home_base": "ENGM",
+  "base_tz": "Europe/Oslo",
+  "_note": "23:00 report uses the wrapping 17:00-04:59 row; limit 10:00, FDP 10:15",
+  "duties": [
+    {
+      "report": "2026-09-01T21:00:00Z",
+      "release": "2026-09-02T07:45:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T21:45:00Z",
+          "on_block": "2026-09-01T23:37:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-02T00:17:30Z",
+          "on_block": "2026-09-02T02:10:00Z"
+        },
+        {
+          "flight_no": "DY1002",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-02T02:50:00Z",
+          "on_block": "2026-09-02T04:42:30Z"
+        },
+        {
+          "flight_no": "DY1003",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-02T05:22:30Z",
+          "on_block": "2026-09-02T07:15:00Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# Invented collective agreement. Not based on any real airline's terms.
+extends: easa_base
+name: "Operator A pilot CBA"
+overrides:
+  min_rest_home_base: {value: "14:00", ref: "CBA §7.2"}
+  max_duty_7_days:    {value: "55:00", ref: "CBA §9.1"}

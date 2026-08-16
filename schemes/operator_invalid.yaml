@@ -1,0 +1,6 @@
+# Exists only to prove the invariant. Loading this must raise SchemeError:
+# an agreement may not give crew LESS rest than the regulation requires.
+extends: easa_base
+name: "Invalid overlay"
+overrides:
+  min_rest_home_base: {value: "10:00", ref: "CBA §7.2"}

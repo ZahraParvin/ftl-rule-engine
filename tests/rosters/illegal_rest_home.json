@@ -1,0 +1,48 @@
+{
+  "crew_id": "PARVIN_Z",
+  "home_base": "ENGM",
+  "base_tz": "Europe/Oslo",
+  "_note": "rest 11:30 after a 9:00 duty at home base -- the 12:00 floor binds",
+  "duties": [
+    {
+      "report": "2026-09-01T04:00:00Z",
+      "release": "2026-09-01T13:00:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T04:45:00Z",
+          "on_block": "2026-09-01T08:17:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-01T08:57:30Z",
+          "on_block": "2026-09-01T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "report": "2026-09-02T00:30:00Z",
+      "release": "2026-09-02T09:00:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-02T01:15:00Z",
+          "on_block": "2026-09-02T04:32:30Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-02T05:12:30Z",
+          "on_block": "2026-09-02T08:30:00Z"
+        }
+      ]
+    }
+  ]
+}

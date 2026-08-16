@@ -1,0 +1,14 @@
+# Regulatory baseline. Values from Regulation (EU) 965/2012, Annex III, Subpart FTL.
+# Nothing may loosen these.
+name: "EASA base"
+limits:
+  max_duty_7_days:         {value: "60:00",   ref: "ORO.FTL.210(a)(1)"}
+  max_duty_14_days:        {value: "110:00",  ref: "ORO.FTL.210(a)(2)"}
+  max_duty_28_days:        {value: "190:00",  ref: "ORO.FTL.210(a)(3)"}
+  max_block_28_days:       {value: "100:00",  ref: "ORO.FTL.210(b)(1)"}
+  max_block_calendar_year: {value: "900:00",  ref: "ORO.FTL.210(b)(2)"}
+  max_block_12_months:     {value: "1000:00", ref: "ORO.FTL.210(b)(3)"}
+  min_rest_home_base:      {value: "12:00",   ref: "ORO.FTL.235(a)"}
+  min_rest_away_base:      {value: "10:00",   ref: "ORO.FTL.235(b)"}
+  rexrest_min_duration:    {value: "36:00",   ref: "ORO.FTL.235(d)"}
+  rexrest_max_interval:    {value: "168:00",  ref: "ORO.FTL.235(d)"}

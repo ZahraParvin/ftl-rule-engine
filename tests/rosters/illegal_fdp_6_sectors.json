@@ -1,0 +1,56 @@
+{
+  "crew_id": "PARVIN_Z",
+  "home_base": "ENGM",
+  "base_tz": "Europe/Oslo",
+  "_note": "FDP 11:05 exceeds the 11:00 limit for 6 sectors reporting 06:00 local",
+  "duties": [
+    {
+      "report": "2026-09-01T04:00:00Z",
+      "release": "2026-09-01T15:35:00Z",
+      "legs": [
+        {
+          "flight_no": "DY1000",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T04:45:00Z",
+          "on_block": "2026-09-01T05:55:00Z"
+        },
+        {
+          "flight_no": "DY1001",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-01T06:35:00Z",
+          "on_block": "2026-09-01T07:45:00Z"
+        },
+        {
+          "flight_no": "DY1002",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T08:25:00Z",
+          "on_block": "2026-09-01T09:35:00Z"
+        },
+        {
+          "flight_no": "DY1003",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-01T10:15:00Z",
+          "on_block": "2026-09-01T11:25:00Z"
+        },
+        {
+          "flight_no": "DY1004",
+          "dep": "ENGM",
+          "arr": "ENBR",
+          "off_block": "2026-09-01T12:05:00Z",
+          "on_block": "2026-09-01T13:15:00Z"
+        },
+        {
+          "flight_no": "DY1005",
+          "dep": "ENBR",
+          "arr": "ENGM",
+          "off_block": "2026-09-01T13:55:00Z",
+          "on_block": "2026-09-01T15:05:00Z"
+        }
+      ]
+    }
+  ]
+}
