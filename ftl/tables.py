@@ -34,13 +34,12 @@ class FdpTable:
         raise ValueError(f"no sector band for {sectors} sectors")
 
     def lookup(self, report_local: time, sectors: int) -> timedelta:
-        """Maximum daily FDP for this local report time and sector count.
-
-        TODO(rule): walk the rows, find the band containing `report_local`
-        (remember the 17:00-04:59 row wraps), then index by sector band.
-        Raise a clear error if nothing matches -- silence here is dangerous.
-        """
-        raise NotImplementedError("FdpTable.lookup")
+        """Maximum daily FDP for this local report time and sector count."""
+        col = self.sector_index(sectors)
+        for lo_str, hi_str, values in self.rows:
+            if in_band(report_local, parse_clock(lo_str), parse_clock(hi_str)):
+                return parse_hm(values[col])
+        raise ValueError(f"{self.ref}: no row matches report time {report_local}")
 
 
 # Table 2 -- acclimatised crew members. Columns: 1-2, 3, 4, 5, 6, 7, 8, 9, 10+

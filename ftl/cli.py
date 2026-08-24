@@ -15,6 +15,7 @@ from .model import Roster
 
 
 def main(argv: list[str] | None = None) -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
     p = argparse.ArgumentParser(prog="ftl")
     sub = p.add_subparsers(dest="cmd", required=True)
 

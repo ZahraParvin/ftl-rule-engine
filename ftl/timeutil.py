@@ -34,27 +34,34 @@ def parse_clock(s: str) -> time:
 def in_band(t: time, lo: time, hi: time) -> bool:
     """Is local clock time `t` inside the band [lo, hi], inclusive?
 
-    TODO(rule): bands may wrap past midnight -- ORO.FTL.205 Table 2 has a
-    17:00-04:59 row. A naive `lo <= t <= hi` silently matches nothing for a
-    23:00 report and the table lookup then reports "no limit found", which is
-    worse than a wrong limit because it looks like a pass.
-
-    See tests/test_fdp_table.py::test_wraparound_band.
+    Bands may wrap past midnight -- ORO.FTL.205 Table 2 has a 17:00-04:59 row.
     """
-    raise NotImplementedError("in_band: handle bands that wrap past midnight")
+    if lo <= hi:
+        return lo <= t <= hi
+    # Wrapping band (e.g., 17:00-04:59): matches after lo OR before/at hi.
+    return t >= lo or t <= hi
 
 
 def local_nights_between(start: datetime, end: datetime, tz: str) -> int:
-    """Count complete local nights inside a rest period.
+    """Count complete local nights (22:00-08:00) fully inside [start, end].
 
-    A local night is 22:00-08:00 local time in `tz`. ORO.FTL.235(d) requires a
-    recurrent extended recovery rest to contain at least 2 of them.
-
-    TODO(rule): use zoneinfo arithmetic, never fixed UTC offsets. A rest period
-    spanning a DST transition changes elapsed length without changing wall-clock
-    length -- see tests/test_rest.py::test_rexrest_short_across_spring_forward.
+    Uses ZoneInfo so DST transitions are handled correctly -- a rest that spans
+    the spring-forward clock change is shorter in UTC than its wall-clock span.
     """
-    raise NotImplementedError("local_nights_between: count 22:00-08:00 local nights")
+    from datetime import date, timedelta as _td
+    zone = ZoneInfo(tz)
+    count = 0
+    d = start.astimezone(zone).date()
+    for _ in range(400):
+        night_start = datetime(d.year, d.month, d.day, 22, 0, tzinfo=zone)
+        next_day = d + _td(days=1)
+        night_end = datetime(next_day.year, next_day.month, next_day.day, 8, 0, tzinfo=zone)
+        if night_start > end:
+            break
+        if night_start >= start and night_end <= end:
+            count += 1
+        d = next_day
+    return count
 
 
 def encroaches_wocl(start: datetime, end: datetime, tz: str) -> timedelta:

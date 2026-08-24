@@ -1,0 +1,51 @@
+## Rule 1 — maximum daily FDP (ORO.FTL.205(b), Table 2)
+
+CONSTRAINT max_daily_fdp OF Duty
+    COMMENT: "FDP must not exceed the ORO.FTL.205(b) Table 2 limit for the local
+              report time and sector count."
+    STATUS: ON;
+    RULE:
+        duty.%flight_duty_period% <=
+            max_daily_fdp(duty.%local_report_time%, duty.%number_of_sectors%);
+ENDCONSTRAINT
+
+
+## Rule 2 — cumulative duty in 7 consecutive days (ORO.FTL.210(a)(1))
+
+CONSTANTS
+    %max_duty_7_days% = 60:00;
+ENDCONSTANTS
+
+CONSTRAINT max_duty_in_7_days OF Roster
+    COMMENT: "Total duty must not exceed 60 hours in any 7 consecutive days."
+    STATUS: ON;
+    RULE:
+        sum(duty(roster_window_7_days), duty.%duty_time%) <= %max_duty_7_days%;
+ENDCONSTRAINT
+
+
+
+## Rule 3 — consecutive early starts (FRMS policy)
+
+CONSTANTS:
+  %early_start_threshold% = 06:00;
+  %max_consecutive_early_starts% = 3;
+ENDCONSTANTS
+
+
+%is_early_start% = 
+  duty.%start_local_time% < %early_start_threshold%;
+
+%consecutive_early_starts_counter% =
+  if %is_early_start% then
+    prev(duty(roster), %consecutive_early_starts_counter%) + 1
+  else
+    0;
+
+CONSTRAINT max_consecutive_early_starts OF Roster
+  COMMENT: "A crew member cannot fly more than 3 consecutive early start duties."
+  STATUS: ON;
+  RULE:
+    all(duty(roster), %consecutive_early_starts_counter% <= %max_consecutive_early_starts%);
+ENDCONSTRAINT
+

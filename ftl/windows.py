@@ -26,23 +26,30 @@ def duty_frame(roster: Roster) -> pl.DataFrame:
 
 
 def rolling_totals(roster: Roster, days: int) -> pl.DataFrame:
-    """Duty and block hours in the `days`-day window starting at each duty.
+    """Duty and block hours in the forward `days`-day half-open window [t, t+days) starting at each duty.
 
-    TODO(rule): implement with pl.DataFrame.rolling over "report" with
-    period=f"{days}d". Two things to get right:
-
-      * The window must look FORWARD from each duty start, not backward. The
-        regulation limits any consecutive period, and anchoring forward from
-        each duty start covers every window that could be worst.
-      * The interval is half-open. A duty landing exactly on the far boundary
-        belongs to the next window, not this one, and counting it in both
-        double-counts. Check `closed=` carefully.
-
-    Returns a frame with columns: report, duty_window, block_window.
-
-    See tests/test_cumulative.py::test_sliding_window_beats_calendar_week.
+    Forward-looking: the window opens at each duty's report time, not backward.
+    Half-open: a duty landing exactly on the far boundary belongs to the next window.
     """
-    raise NotImplementedError("rolling_totals")
+    from datetime import timedelta
+    df = duty_frame(roster)
+    period = timedelta(days=days)
+    reports = df["report"].to_list()
+    duty_h = df["duty_h"].to_list()
+    block_h = df["block_h"].to_list()
+    n = len(reports)
+
+    duty_windows = []
+    block_windows = []
+    for i in range(n):
+        cutoff = reports[i] + period
+        duty_windows.append(sum(duty_h[j] for j in range(i, n) if reports[j] < cutoff))
+        block_windows.append(sum(block_h[j] for j in range(i, n) if reports[j] < cutoff))
+
+    return df.with_columns([
+        pl.Series("duty_window", duty_windows),
+        pl.Series("block_window", block_windows),
+    ])
 
 
 def dedupe_overlapping(results: list, key=lambda r: r.subject) -> list:

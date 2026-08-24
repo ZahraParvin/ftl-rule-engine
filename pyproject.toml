@@ -11,6 +11,9 @@ dev = ["pytest>=8.0"]
 [project.scripts]
 ftl = "ftl.cli:main"
 
+[tool.setuptools.packages.find]
+include = ["ftl*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = [".", "tests"]

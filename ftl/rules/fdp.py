@@ -9,17 +9,22 @@ from ..timeutil import hm
 
 @rule(level=Level.DUTY, id="ORO.FTL.205(b)", title="Basic maximum daily FDP")
 def max_daily_fdp(duty: Duty, ctx: Context) -> RuleResult:
-    """FDP must not exceed the Table 2 value for report time and sector count.
-
-    TODO(rule): look up the limit with TABLE_2.lookup(duty.report_local.time(),
-    duty.sectors), compare against duty.fdp, and on failure build a remark that
-    names the actual, the limit, the sector count and the LOCAL report time.
-
-    "FDP violation" is useless to a planner. This is what they need:
-        FDP 11:20 exceeds 11:15 (ORO.FTL.205(b) Table 2, 2 sectors,
-        report 16:45 local)
-    """
-    raise NotImplementedError("max_daily_fdp")
+    """FDP must not exceed the Table 2 value for report time and sector count."""
+    limit = TABLE_2.lookup(duty.report_local.time(), duty.sectors)
+    ok = duty.fdp <= limit
+    sector_word = "sector" if duty.sectors == 1 else "sectors"
+    remark = (
+        f"FDP {hm(duty.fdp)} exceeds {hm(limit)} "
+        f"(ORO.FTL.205(b) Table 2, {duty.sectors} {sector_word}, "
+        f"report {duty.report_local.strftime('%H:%M')} local)"
+    ) if not ok else ""
+    return RuleResult(
+        rule_id="ORO.FTL.205(b)",
+        title="Basic maximum daily FDP",
+        ok=ok,
+        remark=remark,
+        subject=f"Duty {duty.report_local.strftime('%Y-%m-%d %H:%M')} local",
+    )
 
 
 @rule(level=Level.DUTY, id="ORO.FTL.205(b)(2)",
