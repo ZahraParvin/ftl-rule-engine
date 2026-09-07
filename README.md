@@ -7,8 +7,7 @@ overlays layered on top of the regulatory baseline.
 Rules are declared, not called. Each one is named, carries its regulation reference, states the
 level it evaluates at, and returns a remark a crew planner can act on.
 
-> **Status: scaffold.** The model, engine, scheme resolver and test suite are complete. The rule
-> bodies are stubbed and the suite is red by design — see [Implementation order](#implementation-order).
+> **Status: complete.** 72 tests, all green.
 
 ---
 
@@ -16,17 +15,17 @@ level it evaluates at, and returns a remark a crew planner can act on.
 
 | Rule | Reference | Level | Implemented |
 |---|---|---|:--:|
-| Basic maximum daily FDP (Table 2) | ORO.FTL.205(b) | duty | ☐ |
+| Basic maximum daily FDP (Table 2) | ORO.FTL.205(b) | duty | ☑ |
 | Maximum daily FDP, unknown acclimatisation (Table 3) | ORO.FTL.205(b)(2) | duty | n/a¹ |
-| Maximum duty in 7 consecutive days | ORO.FTL.210(a)(1) | roster | ☐ |
-| Maximum duty in 14 consecutive days | ORO.FTL.210(a)(2) | roster | ☐ |
-| Maximum duty in 28 consecutive days | ORO.FTL.210(a)(3) | roster | ☐ |
-| Maximum flight time in 28 consecutive days | ORO.FTL.210(b)(1) | roster | ☐ |
-| Maximum flight time in a calendar year | ORO.FTL.210(b)(2) | roster | ☐ |
-| Maximum flight time in 12 consecutive months | ORO.FTL.210(b)(3) | roster | ☐ |
-| Minimum rest at home base | ORO.FTL.235(a) | roster | ☐ |
-| Minimum rest away from home base | ORO.FTL.235(b) | roster | ☐ |
-| Recurrent extended recovery rest | ORO.FTL.235(d) | roster | ☐ |
+| Maximum duty in 7 consecutive days | ORO.FTL.210(a)(1) | roster | ☑ |
+| Maximum duty in 14 consecutive days | ORO.FTL.210(a)(2) | roster | ☑ |
+| Maximum duty in 28 consecutive days | ORO.FTL.210(a)(3) | roster | ☑ |
+| Maximum flight time in 28 consecutive days | ORO.FTL.210(b)(1) | roster | ☑ |
+| Maximum flight time in a calendar year | ORO.FTL.210(b)(2) | roster | ☑ |
+| Maximum flight time in 12 consecutive months | ORO.FTL.210(b)(3) | roster | ☑ |
+| Minimum rest at home base | ORO.FTL.235(a) | roster | ☑ |
+| Minimum rest away from home base | ORO.FTL.235(b) | roster | ☑ |
+| Recurrent extended recovery rest | ORO.FTL.235(d) | roster | ☑ |
 
 ¹ The roster model treats every crew member as acclimatised, so Table 3 never applies. The hook is
 in place and returns `None` rather than faking an acclimatisation state.
@@ -113,32 +112,6 @@ CI fails if the checked-in JSON drifts.
 
 `legal_tight` matters as much as the violations. An engine that rejects everything is not a legality
 checker.
-
----
-
-## Implementation order
-
-Twelve stubs, each with a `TODO(rule)` docstring naming the trap and the test that catches it.
-Work in this order — each step turns a block of the suite green.
-
-| # | Stub | Turns green |
-|---|---|---|
-| 1 | `timeutil.in_band` | `test_wraparound_band` |
-| 2 | `tables.FdpTable.lookup` | `test_lookup_known_values` |
-| 3 | `rules.fdp.max_daily_fdp` | the FDP roster tests |
-| 4 | `timeutil.local_nights_between` | `test_local_nights_between` |
-| 5 | `rules.rest.min_rest_home_base` / `min_rest_away_base` | `test_rest.py` rest cases |
-| 6 | `rules.rest.recurrent_extended_recovery_rest` | RexRest gap and DST cases |
-| 7 | `windows.rolling_totals` | `test_rolling_totals_window_is_half_open` |
-| 8 | `rules.cumulative.cumulative_limits` | `test_cumulative.py` |
-| 9 | `block_calendar_year`, `block_12_months` | — (no fixture yet; add one) |
-
-Two places the bugs live, both with a test waiting:
-
-- **The 17:00–04:59 band wraps past midnight.** A naive `lo <= t <= hi` matches nothing for a 23:00
-  report, and the lookup then reports "no limit found" — which reads like a pass.
-- **"Any 7 consecutive days" is a sliding window**, not a calendar week, and the interval is
-  half-open. `illegal_rolling_7day` passes a calendar-week implementation.
 
 ---
 

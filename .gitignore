@@ -3,4 +3,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.egg-info/
+dist/
+build/
 DESIGN.md
+docs/
+.claude/
+
