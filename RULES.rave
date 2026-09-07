@@ -266,7 +266,7 @@ ENDCONSTRAINT
         prev(duty(roster), %prev_rexrest_end%);
 
 // (b) Interval check
-CONSTRAINT rexrest_max_interval OF Roster
+CONSTRAINT rexrest_interval_check OF Roster
     COMMENT: "Gap between consecutive extended recovery rests must not exceed 168:00."
     STATUS: ON;
     RULE:

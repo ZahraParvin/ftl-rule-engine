@@ -17,8 +17,8 @@ level it evaluates at, and returns a remark a crew planner can act on.
 
 **It has never been compiled.** I have no access to a Jeppesen installation and the official
 language reference is not public, so the syntax is reconstructed from published papers and public
-teaching material. Treat it as a translation exercise that shows how these rules map onto Rave's
-level model, traversers and table lookups — not as code that runs.
+teaching material. It is a translation exercise that shows how these rules map onto Rave's
+level model, traversers and table lookups and not a code that runs.
 
 The Python in `ftl/` is the source of truth: every rule there has a passing test. Corrections from
 anyone who writes Rave professionally are welcome.
@@ -46,7 +46,7 @@ in place and returns `None` rather than faking an acclimatisation state.
 
 ### Deliberately out of scope
 
-Not partial implementations — omissions, and the reason for each:
+Not partial implementations, omissions, and the reason for each:
 
 - **Extensions without in-flight rest (205(d))** and **with in-flight rest (205(e))** — both depend
   on WOCL encroachment and crew augmentation, neither of which the roster model carries.
