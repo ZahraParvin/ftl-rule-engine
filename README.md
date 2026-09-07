@@ -11,6 +11,20 @@ level it evaluates at, and returns a remark a crew planner can act on.
 
 ---
 
+## RULES.rave — a study exercise, not production Rave
+
+`RULES.rave` expresses the same eleven rules in the Jeppesen Rave rule language.
+
+**It has never been compiled.** I have no access to a Jeppesen installation and the official
+language reference is not public, so the syntax is reconstructed from published papers and public
+teaching material. Treat it as a translation exercise that shows how these rules map onto Rave's
+level model, traversers and table lookups — not as code that runs.
+
+The Python in `ftl/` is the source of truth: every rule there has a passing test. Corrections from
+anyone who writes Rave professionally are welcome.
+
+---
+
 ## Rules
 
 | Rule | Reference | Level | Implemented |

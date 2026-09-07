@@ -1,6 +1,28 @@
 // ====================================================================
 // MODULE: EASA Subpart FTL — Regulation (EU) 965/2012 Annex III
 // Rules: ORO.FTL.205 / 210 / 235
+//
+// ⚠  PROVENANCE — READ THIS FIRST
+//
+//    This file has NEVER BEEN COMPILED. It is a study exercise, not
+//    production Rave.
+//
+//    I have no access to a Jeppesen installation, and the official
+//    Rave language reference is not public. The syntax here is
+//    reconstructed from published papers and public teaching
+//    material, so constructs such as etable lookups, the sliding
+//    window traversers (roster_window_7d and friends), `valid`
+//    guards, `is_closed` and the recursive carry-forward pattern are
+//    my best understanding of how these rules WOULD be expressed —
+//    not verified against a real compiler.
+//
+//    What IS verified is the regulation itself and the behaviour:
+//    every rule below has a working Python implementation in ftl/
+//    and a passing test in tests/. The Python is the source of
+//    truth; this file is the translation exercise.
+//
+//    Corrections from anyone who writes Rave for a living are very
+//    welcome.
 // ====================================================================
 
 
@@ -228,7 +250,7 @@ ENDCONSTRAINT
     %local_nights_in_rest% >= 2;
 
 // (a) Duration check
-CONSTRAINT rexrest_min_duration OF Duty
+CONSTRAINT rexrest_duration_check OF Duty
     COMMENT: "An extended recovery rest spanning 2+ local nights must be at least 36:00."
     STATUS: ON;
     RULE:
